@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class BannerReAdapter extends BaseMultiItemQuickAdapter<Javabean, BaseViewHolder> {
     private Context context;
-    private RecyclerView rc_view;
+    private MarqueeView rc_view;
     private AtomicBoolean shouldContinue = new AtomicBoolean(false);
     private Thread thread = null;
     private static final int RECYCLERVIEWRollROLL = 1;
@@ -98,7 +98,7 @@ public class BannerReAdapter extends BaseMultiItemQuickAdapter<Javabean, BaseVie
                 for (int i = 0; i < 90; i++) {
                     mData.add("加载的第" + i + "条数据");
                 }
-                rc_view = (RecyclerView) helper.getView(R.id.rc_view);
+                rc_view = (MarqueeView) helper.getView(R.id.rc_view);
                 Glide.with(context).load(R.drawable.b4).asBitmap()//签到整体 背景
                         .into(new SimpleTarget<Bitmap>(180, 180) {        //设置宽高
                             @Override
