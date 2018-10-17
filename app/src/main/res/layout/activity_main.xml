@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zy.recyclerbanner.MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="144dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.zy.recyclerbanner.BannerIndicator
+        android:id="@+id/indicator"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@+id/recycler"
+        app:selectColor="@color/colorAccent"
+        app:unselectedColor="#ffffff"
+        app:radius="3dp"
+        app:space="10dp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/tv1"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+    </LinearLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="100dp"
+       android:layout_alignParentBottom="true"
+       android:orientation="vertical">
+       <EditText
+           android:id="@+id/et_test"
+           android:layout_width="100dp"
+           android:layout_height="wrap_content"
+           android:hint="请输入文字"/>
+       <Button
+           android:id="@+id/btn_test"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="测试"/>
+
+   </LinearLayout>
+
+</RelativeLayout>
