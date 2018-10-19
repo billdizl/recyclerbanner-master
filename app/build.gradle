@@ -18,6 +18,20 @@ android {
     }
     flavorDimensions "dabao"
     productFlavors {
+        //默认版本,不设置 applicationId ,继承 defaultConfig 中的配置
+        flavors_default {
+            applicationId "com.littlejie.multichannel.tcm"
+        }
+
+        //开发版本, applicationId 替换为 com.littlejie.multichannel.dev
+        flavors_dev {
+            applicationId "com.littlejie.multichannel.dev"
+        }
+
+        //发布版本, applicationId 替换为 com.littlejie.multichannel.release
+        flavors_release {
+            applicationId "com.littlejie.multichannel.release"
+        }
 
         wandoujia {
             dimension "dabao"
@@ -37,7 +51,16 @@ android {
         productFlavors.all { flavor ->
             flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
         }
-
+        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+            def fileName
+            if (variant.buildType.name.equals('debug')) {
+                fileName = "xiaopeng-${defaultConfig.versionName}_debug.apk"
+            } else {
+                def timeStamp = new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+8"));
+                fileName = outputFile.name.replace(".apk", "-${defaultConfig.versionName}-${timeStamp}.apk")
+            }
+            output.outputFile = new File(outputFile.parent, fileName)
+        }
     }
 }
 

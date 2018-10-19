@@ -8,22 +8,13 @@
     android:orientation="vertical"
     tools:context="com.zy.recyclerbanner.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
+    <com.zy.recyclerbanner.RecyclerBanner
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="144dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </com.zy.recyclerbanner.RecyclerBanner>
 
-    <com.zy.recyclerbanner.BannerIndicator
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_alignBottom="@+id/recycler"
-        app:selectColor="@color/colorAccent"
-        app:unselectedColor="#ffffff"
-        app:radius="3dp"
-        app:space="10dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

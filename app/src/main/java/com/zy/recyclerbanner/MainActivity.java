@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isRunning = false;
     private int currentpager=0;
     private ScrollSpeedLinearLayoutManger layoutManager;
-    private RecyclerView recyclerView;
+    private RecyclerBanner recyclerView;
 
     private ReactiveNetwork reactiveNetwork ;
     private Subscription networkConnectivitySubscription;
@@ -90,23 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        BannerAdapter adapter = new BannerAdapter(this, list);
-        BannerReAdapter adapter = new BannerReAdapter(this, list);
+
         recyclerView = findViewById(R.id.recycler);
-        layoutManager = new ScrollSpeedLinearLayoutManger(this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        recyclerView.scrollToPosition(list.size() * 10);
 
 
 
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
-        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                recyclerView.smoothScrollToPosition(layoutManager.findFirstVisibleItemPosition() + 1);
-            }
-        }, 10000, 10000, TimeUnit.MILLISECONDS);
         tvConnectivityStatus = (TextView) findViewById( R.id.tv1 );
         tvInternetStatus= (TextView) findViewById( R.id.tv2 );
         wifiSwitchStatus= (TextView) findViewById( R.id.tv3 );
@@ -162,52 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        // 开启轮询
-//        new Thread(){
-//            public void run() {
-//                isRunning = true;
-//                while(isRunning){
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//
-//                                if ((layoutManager.findFirstVisibleItemPosition()%list.size())+1==list.size()){
-//                                    currentpager=0;
-//                                }else{
-//                                    currentpager= (layoutManager.findFirstVisibleItemPosition()%list.size())+1;
-//                                }
-//                            Toast.makeText(MainActivity.this, "设置当前位置: " + currentpager, Toast.LENGTH_SHORT).show();
-//
-//
-//                        }
-//                    });
-//
-//                    try {
-//
-////                            if (currentpager==0){
-//                              Thread.sleep(8000);
-////                            }else{
-// //                               Thread.sleep(2000);
-//                         //   }
-//
-//
-//
-//
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                    // 往下跳一位
-//                    runOnUiThread(new Runnable() {
-//
-//                        @Override
-//                        public void run() {
-//                            recyclerView.smoothScrollToPosition(layoutManager.findFirstVisibleItemPosition() + 1);
-//                        }
-//                    });
-//
-//                }
-//            };
-//        }.start();
         initdata();
     }
 
@@ -228,22 +170,10 @@ public class MainActivity extends AppCompatActivity {
         javabean3.setBean(R.drawable.b3);
         javabean3.setItem_type(2);
         list.add(javabean3);
-        PagerSnapHelper snapHelper = new PagerSnapHelper();
-        snapHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.setDatas(list,3000);
 
 
-        final BannerIndicator bannerIndicator = findViewById(R.id.indicator);
-        bannerIndicator.setNumber(list.size());
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    int i = layoutManager.findFirstVisibleItemPosition() % list.size();
-                    bannerIndicator.setPosition(i);
-                }
-            }
-        });
     }
     @Override
     protected void onDestroy() {

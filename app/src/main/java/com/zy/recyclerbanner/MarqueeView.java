@@ -35,7 +35,12 @@ public class MarqueeView extends RecyclerView {
                 super.handleMessage(msg);
                 switch (msg.what) {
                     case 1://不论是竖直滚动还是水平滚动，都是偏移5个像素
-                        MarqueeView.this.scrollBy(0, 3);
+                        try{
+                            MarqueeView.this.scrollBy(0, 3);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
                         break;
                 }
             }
@@ -45,7 +50,7 @@ public class MarqueeView extends RecyclerView {
                 public void run() {
                     while (shouldContinue.get()) {
                         try {
-                            Thread.sleep(50);
+                            Thread.sleep(1250);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
